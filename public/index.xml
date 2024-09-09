@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Personal Blog on My Hugo Site</title>
+    <link>http://localhost:53793/</link>
+    <description>Recent content in Personal Blog on My Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Sep 2024 15:31:53 +0800</lastBuildDate>
+    <atom:link href="http://localhost:53793/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo Quickstart</title>
+      <link>http://localhost:53793/hugo-quickstart/</link>
+      <pubDate>Mon, 09 Sep 2024 15:31:53 +0800</pubDate>
+      <guid>http://localhost:53793/hugo-quickstart/</guid>
+      <description>Build Your First Hugo Site In this tutorial, you&amp;rsquo;ll learn how to set up and build a Hugo site from scratch using the Ananke theme. Hugo is a fast, open-source static site generator.&#xA;Prerequisites Before you begin, ensure that you have the following tools installed on your machine:&#xA;Git - Install Git. Hugo - Install Hugo. brew install hugo You can verify the installation by running the following commands in your terminal:</description>
+    </item>
+    <item>
+      <title>Knowledge Sharing</title>
+      <link>http://localhost:53793/knowledge-sharing/</link>
+      <pubDate>Mon, 09 Sep 2024 10:57:21 +0800</pubDate>
+      <guid>http://localhost:53793/knowledge-sharing/</guid>
+      <description>Introduction to Static Site Generators: A Beginner’s Guide Welcome to the world of Static Site Generators (SSGs)! If you’re looking to build a website and have heard about SSGs but aren’t quite sure what they are or how they work, you’ve come to the right place. In this tutorial, we&amp;rsquo;ll walk you through the basics of SSGs, why they’re useful, and how to get started with one.&#xA;Table of Contents What is a Static Site Generator Why Use a Static Site Generator How Does a Static Site Generator Work Getting Started: Building Your Own Static Website What is a Static Site Generator?</description>
+    </item>
+    <item>
+      <title>Terminology Management</title>
+      <link>http://localhost:53793/terminology/</link>
+      <pubDate>Fri, 06 Sep 2024 18:39:15 +0800</pubDate>
+      <guid>http://localhost:53793/terminology/</guid>
+      <description>Introduction This is bold text, and this is emphasized text.&#xA;Visit the Hugo website!</description>
+    </item>
+  </channel>
+</rss>
