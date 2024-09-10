@@ -53,7 +53,7 @@ Prerequisites Before you begin, ensure that you have the following tools install
 Git - Install Git. Hugo - Install Hugo. brew install hugo You can verify the installation by running the following commands in your terminal:">
   <meta itemprop="datePublished" content="2024-09-09T15:31:53+08:00">
   <meta itemprop="dateModified" content="2024-09-09T15:31:53+08:00">
-  <meta itemprop="wordCount" content="462">
+  <meta itemprop="wordCount" content="524">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Hugo Quickstart">
   <meta name="twitter:description" content="Build Your First Hugo Site In this tutorial, you’ll learn how to set up and build a Hugo site from scratch using the Ananke theme. Hugo is a fast, open-source static site generator.
@@ -132,12 +132,10 @@ Git - Install Git. Hugo - Install Hugo. brew install hugo You can verify the ins
 </span></span></code></pre></div><p>Now, initialize a new Git repository and add the <strong>Ananke</strong> theme as a submodule:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init
 </span></span><span style="display:flex;"><span>git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
-</span></span></code></pre></div><h2 id="step-3-configure-the-site">Step 3: Configure the Site</h2>
+</span></span></code></pre></div><p>Themes in Hugo help define the visual appearance, layout, and structure of a website. Themes can include predefined templates, styles, and components that make it easier to design and launch a site without building everything from scratch. There are many free and paid Hugo themes available, covering various use cases like blogs, portfolios, documentation, and more. You can visit <a href="https://themes.gohugo.io/">Hugo Themes</a> to browse and choose a theme that fits your site’s style and purpose.</p>
+<h2 id="step-3-configure-the-site">Step 3: Configure the Site</h2>
 <p>Open the <code>hugo.toml</code> file in your Hugo site root folder and add the following configurations:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>baseURL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://example.org/&#34;</span>
-</span></span><span style="display:flex;"><span>languageCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;en-us&#34;</span>
-</span></span><span style="display:flex;"><span>title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;My New Hugo Site&#34;</span>
-</span></span><span style="display:flex;"><span>theme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ananke&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>theme <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ananke&#34;</span>
 </span></span></code></pre></div><p>This tells Hugo to use the Ananke theme.</p>
 <h2 id="step-4-create-your-first-content">Step 4: Create Your First Content</h2>
 <p>Now that your theme is set up, create your first content by running:</p>
