@@ -52,15 +52,14 @@ git init
 git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
 ```
 
+Themes in Hugo help define the visual appearance, layout, and structure of a website. Themes can include predefined templates, styles, and components that make it easier to design and launch a site without building everything from scratch. There are many free and paid Hugo themes available, covering various use cases like blogs, portfolios, documentation, and more. You can visit [Hugo Themes](https://themes.gohugo.io/) to browse and choose a theme that fits your site’s style and purpose.
+
 
 ## Step 3: Configure the Site
 
 Open the `hugo.toml` file in your Hugo site root folder and add the following configurations:
 
 ```bash
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
 theme = "ananke"
 ```
 
