@@ -1,7 +1,7 @@
 +++
 title = 'Knowledge Sharing'
 date = 2024-09-09T10:57:21+08:00
-draft = true
+draft = false
 featured_image = '/images/esmeralda.jpg'
 +++
 
