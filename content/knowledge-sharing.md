@@ -9,18 +9,18 @@ featured_image = '/images/esmeralda.jpg'
 
 Welcome to the world of Static Site Generators (SSGs)! If you’re looking to build a website and have heard about SSGs but aren’t quite sure what they are or how they work, you’ve come to the right place. In this tutorial, we'll walk you through the basics of SSGs, why they’re useful, and how to get started with one.
 
-
-## Table of Contents
-- What is a Static Site Generator
-- Why Use a Static Site Generator
-- How Does a Static Site Generator Work
-- Getting Started: Building Your Own Static Website
+- [Introduction to Static Site Generators: A Beginner’s Guide](#introduction-to-static-site-generators-a-beginners-guide)
+  - [What is a Static Site Generator?](#what-is-a-static-site-generator)
+  - [Why Use a Static Site Generator?](#why-use-a-static-site-generator)
+  - [How Does a Static Site Generator Work?](#how-does-a-static-site-generator-work)
+  - [Popular Static Site Generators](#popular-static-site-generators)
+  - [Getting Started: Building Your Own Static Website](#getting-started-building-your-own-static-website)
 
 ## What is a Static Site Generator?
 
 Imagine you want to build a house. You could either gather all the materials yourself and construct it brick by brick, or you could use pre-made components to speed up the process. A Static Site Generator is like the latter option for building websites. It automates the process of creating web pages by taking your content (like text and images) and combining it with templates to produce a fully-fledged website.
 
-## Basic Concepts
+**Basic Concepts**
 
 Most websites today fall into two categories - dynamic sites and static sites:
 
@@ -66,17 +66,16 @@ Let’s break down the process into simple steps:
 
 Many static site generators are available for use today. Some important ones to know are:
 
-- **Hugo**: Written in Go with support for multi-language sites and complex content strategy.
-- **Jekyll**: Written in Ruby, built for blogging, and has a large collection of plugins and themes.
-- **Hexo**: Node.js based with support for multiple templating engines, integrations with NPM packages, and one command deployment.
-- **GatsbyJS**: React-based, works with any CMS, API, or database, and can be used for building headless experiences.
-- **Astro**: JavaScript-based, supports multiple frameworks, and is known for on-demand rendering via partial hydration.
+- **Hugo**: Written in Go, Hugo is a powerful and fast open-source static site generator. It supports multilingual sites and is well-suited for handling complex content strategies. Known for its remarkable speed and flexibility, Hugo enables developers to build websites efficiently, making it one of the most popular static site generators available.
+- **Jekyll**: Built with Ruby, Jekyll is a static site generator designed primarily for blogging. It has a vast collection of plugins and themes, allowing users to create highly customizable sites. Jekyll is widely known for its simplicity and integration with GitHub Pages, making it a favorite for personal blogs and portfolios.
+- **GatsbyJS**: GatsbyJS is a React-based static site generator that excels at creating fast, scalable websites and applications. Leveraging React components, GraphQL for data fetching, and a rich plugin ecosystem, it integrates seamlessly with any CMS, API, or database.
+- **Sphinx**: Originally created for generating Python documentation, Sphinx is a highly versatile static site generator written in Python. It supports multiple output formats, including HTML, LaTeX, and PDF. With its extensive extension system and seamless integration with reStructuredText, Sphinx is ideal for technical documentation and knowledge bases, offering advanced features like cross-referencing and version control.
 
 ## Getting Started: Building Your Own Static Website
 
-### [Set Up Sphinx with Python]()
+- [Set Up Sphinx with Python](https://www.docslikecode.com/learn/01-sphinx-python-rtd/)
 
-### [Build Your First Hugo Site](../hugo-quickstart)
+- [Build Your First Hugo Site](../hugo-quickstart)
 
 
-All static site generators can be exciting and fun, but some require time and effort on configurations, detailed templating, or management tweaks. My team and I joke that I am one of the top blog-less SSG experts, so in this blog post, I’ll walk you through a toolkit for evaluating your project and then share some SSGs that deploy to GitLab Pages.
+Static site generators are powerful, but some require a bit of configuration and learning. With time, you can build fast, secure, and scalable websites that meet your needs.

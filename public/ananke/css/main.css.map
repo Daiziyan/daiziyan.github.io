@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "/Users/daiziyan/personal/hugo/first-hugo",
+	"sourceRoot": "/Users/daiziyan/personal/hugo/daiziyan.github.io",
 	"sources": [
 		"ananke/css/main.css"
 	],

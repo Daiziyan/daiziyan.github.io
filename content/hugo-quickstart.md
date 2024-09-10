@@ -76,33 +76,36 @@ hugo new posts/my-first-post.md
 
 This command generates a new markdown file in the `content/posts/` directory. Open it and start editing. You can update the content as needed.
 
+Notice the `draft` value in the front matter is `true`. By default, Hugo does not publish draft content when you build the site.
+
 ## Step 5: Run the Local Development Server
 
-To preview your site, run Hugo’s development server:
+To preview your site, you can run either of the following commands to include draft content.
 
 ```bash
-hugo server
+hugo server --buildDrafts
+hugo server -D
 ```
 
-By default, Hugo serves your site at `http://localhost:1313/`. You can view your site in your web browser by navigating to that URL.
+View your site at the URL displayed in your terminal. By default, Hugo serves your site at `http://localhost:1313/`. You can view your site in your web browser by navigating to that URL.
 
 ## Step 6: Build Your Site for Production
 
-Once you're happy with your site, you can build it for production by running:
+Once you're happy with your site, set the front matter `draft` parameter to `false`. Then you can build it for production by running:
 
 ```bash
 hugo
 ```
 
-The built files will be placed in the `public/` directory, ready to be deployed to your preferred hosting provider.
+This Command will not build `draft`, `future`, or `expired` content. The built files will be placed in the `public/` directory, ready to be deployed to your preferred hosting provider.
 
 ## Step 7: Deploy Your Site
 
 There are various ways to deploy your Hugo site. Some common options are:
 
 1. **GitHub Pages**
-2. **Netlify**
-3. **Vercel**
+2. **Gitlab Pages**
+3. **AWS Amplify**
 
 Check Hugo's official [deployment guide](https://gohugo.io/hosting-and-deployment/) for detailed instructions.
 
