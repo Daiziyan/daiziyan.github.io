@@ -17,9 +17,9 @@
     </item>
     <item>
       <title>Knowledge Sharing</title>
-      <link>https://example.org/knowledge-sharing/</link>
+      <link>https://example.org/ssg-introduction/</link>
       <pubDate>Mon, 09 Sep 2024 10:57:21 +0800</pubDate>
-      <guid>https://example.org/knowledge-sharing/</guid>
+      <guid>https://example.org/ssg-introduction/</guid>
       <description>Introduction to Static Site Generators: A Beginner’s Guide Welcome to the world of Static Site Generators (SSGs)! If you’re looking to build a website and have heard about SSGs but aren’t quite sure what they are or how they work, you’ve come to the right place. In this tutorial, we&amp;rsquo;ll walk you through the basics of SSGs, why they’re useful, and how to get started with one.&#xA;Introduction to Static Site Generators: A Beginner’s Guide What is a Static Site Generator?</description>
     </item>
   </channel>
