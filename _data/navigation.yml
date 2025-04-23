@@ -9,7 +9,7 @@ main:
     url: /cv/
 
   - title: "Blog Posts"
-    url: /year-archive/
+    url: /blog-posts/
 
   - title: "Technical Writing"
     url: /technical-writing/
