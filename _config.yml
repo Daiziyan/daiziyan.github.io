@@ -12,10 +12,10 @@ site_theme               : "default"
 title                    : "Road to Technical Writer"
 title_separator          : "-"
 name                     : &name "Dai Ziyan"
-description              : &description "personal description"
+description              : &description "技术写作者的个人网站，分享技术写作技巧、工具使用和职业发展经验"
 url                      : https://daiziyan.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+repository               : "daiziyan/daiziyan.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -25,10 +25,10 @@ author:
   avatar           : "bio-photo.jpg"
   name             : "Dai Ziyan"
   pronouns         : # example: "she/her"
-  bio              : ""
-  location         : "Shanghai"
+  bio              : "Technical Writer"
+  location         : "Shanghai, China"
   employer         : "Espressif"
-  uri              : # URL
+  uri              : "https://daiziyan.github.io"
   email            : "dora_online@163.com"
 
   # Academic websites
@@ -45,7 +45,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "academicpages"
+  github           : "Daiziyan"
   kaggle           : # Username
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")
 
