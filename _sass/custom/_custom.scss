@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Custom Styles - Wider Page Layout
+   ========================================================================== */
+
+/* Increase overall container width for better readability */
+#main {
+  @include breakpoint($x-large) {
+    max-width: 1600px; /* Increased from 1280px */
+  }
+}
+
+/* Adjust page layout: increase content width while maintaining sidebar spacing */
+.page {
+  @include breakpoint($large) {
+    /* Override grid system to account for fixed sidebar */
+    /* Sidebar is fixed at max 250px, so we need proper spacing */
+    margin-left: 280px !important; /* Sidebar (250px) + gap (30px) */
+    width: calc(100% - 300px) !important; /* Full width minus sidebar space */
+    max-width: none !important;
+    float: left !important;
+
+    /* Remove original grid spans that would conflict */
+    margin-right: 0 !important;
+  }
+
+  @include breakpoint($x-large) {
+    /* On extra large screens, use even more width */
+    margin-left: 280px !important;
+    width: calc(100% - 320px) !important; /* More width, less right margin */
+  }
+}
+
+/* Ensure content area uses full width */
+.page__content {
+  max-width: 100%;
+}
+
