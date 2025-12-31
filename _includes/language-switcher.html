@@ -29,11 +29,14 @@
 
   // Get current language from localStorage, URL, or default to 'en'
   function getCurrentLanguage() {
-    // Check URL first
+    // Check URL first - normalize path for GitHub Pages compatibility
     var path = window.location.pathname;
-    if (path.startsWith('/zh/')) {
+    // Remove trailing slash for comparison (except root)
+    var normalizedPath = path === '/' ? '/' : path.replace(/\/$/, '');
+
+    if (normalizedPath === '/zh' || path.startsWith('/zh/')) {
       return 'zh';
-    } else if (path.startsWith('/en/')) {
+    } else if (normalizedPath === '/en' || path.startsWith('/en/')) {
       return 'en';
     }
     // Then check localStorage
@@ -61,12 +64,26 @@
   // Get equivalent page URL in another language
   function getEquivalentUrl(targetLang) {
     var currentPath = window.location.pathname;
-    var currentBase = currentLang === 'zh' ? '/zh' : '/en';
+    // Get current language dynamically from URL
+    var currentLangFromUrl = getCurrentLanguage();
+    var currentBase = currentLangFromUrl === 'zh' ? '/zh' : '/en';
     var targetBase = targetLang === 'zh' ? '/zh' : '/en';
 
-    // If already on a language-specific page, swap the language prefix
-    if (currentPath.startsWith(currentBase + '/')) {
-      return currentPath.replace(currentBase, targetBase);
+    // Normalize path - remove trailing slash for comparison (except root)
+    var normalizedPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
+
+    // Check if path starts with language prefix (with or without trailing slash)
+    if (normalizedPath === currentBase || normalizedPath === currentBase + '/' || currentPath === currentBase || currentPath === currentBase + '/') {
+      // Home page - redirect to target language home
+      return targetBase + '/';
+    } else if (currentPath.startsWith(currentBase + '/')) {
+      // Language-specific page - swap the language prefix
+      var newPath = currentPath.replace(currentBase, targetBase);
+      // Ensure trailing slash for consistency
+      if (!newPath.endsWith('/') && newPath.indexOf('?') === -1 && newPath.indexOf('#') === -1) {
+        newPath += '/';
+      }
+      return newPath;
     }
 
     // Otherwise, redirect to home page in target language
@@ -111,15 +128,31 @@
     // Add click handler (only once)
     if (!langSwitcher.hasAttribute('data-handler-attached')) {
       langSwitcher.setAttribute('data-handler-attached', 'true');
-      langSwitcher.addEventListener('click', function(e) {
+
+      // Use both click and mousedown events for better compatibility
+      var handleLanguageSwitch = function(e) {
         e.preventDefault();
-        var newLang = currentLang === 'en' ? 'zh' : 'en';
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        // Get current language dynamically from URL
+        var currentLangFromUrl = getCurrentLanguage();
+        var newLang = currentLangFromUrl === 'en' ? 'zh' : 'en';
         localStorage.setItem('site-language', newLang);
 
         // Redirect to equivalent page in new language
         var newUrl = getEquivalentUrl(newLang);
-        window.location.href = newUrl;
-      });
+        if (newUrl) {
+          window.location.href = newUrl;
+        }
+        return false;
+      };
+
+      langSwitcher.addEventListener('click', handleLanguageSwitch, true);
+      langSwitcher.addEventListener('mousedown', handleLanguageSwitch, true);
+
+      // Also handle touch events for mobile
+      langSwitcher.addEventListener('touchend', handleLanguageSwitch, true);
     }
   }
 
@@ -195,12 +228,31 @@
     }
   }
 
-  // Run on DOM ready
+  // Run on DOM ready with retry mechanism for GitHub Pages
+  function tryInitLanguage(retries) {
+    retries = retries || 0;
+    var maxRetries = 10;
+
+    var langSwitcher = document.getElementById('lang-switcher');
+    if (!langSwitcher && retries < maxRetries) {
+      // Element not found, retry after a short delay
+      setTimeout(function() {
+        tryInitLanguage(retries + 1);
+      }, 100);
+      return;
+    }
+
+    // Element found or max retries reached, initialize
+    initLanguage();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLanguage);
+    document.addEventListener('DOMContentLoaded', function() {
+      tryInitLanguage();
+    });
   } else {
-    // DOM already loaded
-    setTimeout(initLanguage, 100);
+    // DOM already loaded, but may need to wait for elements
+    tryInitLanguage();
   }
 })();
 </script>
