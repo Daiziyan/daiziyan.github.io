@@ -40,6 +40,18 @@
     margin: 2em auto 0 !important; /* Center the container */
     padding-left: 3em !important;
     padding-right: 3em !important;
+    /* CRITICAL: Ensure flexbox layout doesn't cause vertical stacking */
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+
+  /* Additional fix for screens wider than 1600px */
+  @media screen and (min-width: 1600px) {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 2em !important;
   }
 }
 
@@ -75,26 +87,99 @@
   }
 }
 
-/* Ensure content area uses full width */
-.page__content {
+/* Ensure page__inner-wrap doesn't break layout */
+.page__inner-wrap {
+  width: 100% !important;
   max-width: 100% !important;
-  line-height: 1.8 !important; /* Better readability */
-  background: var(--global-bg-color) !important;
-  padding: 2em !important;
-  border-radius: 8px !important;
+  display: block !important;
+  flex-direction: initial !important; /* Prevent flex column layout */
+  flex-wrap: initial !important;
 
   @include breakpoint($large) {
-    padding: 3em !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+  }
+
+  @include breakpoint($x-large) {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    /* CRITICAL: Prevent flex column layout on extra large screens */
+    flex: none !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Ensure content area uses full width */
+.page__content,
+section.page__content {
+  max-width: 100% !important;
+  width: 100% !important;
+  line-height: 1.8 !important; /* Better readability */
+  background: transparent !important; /* Remove background to avoid conflicts */
+  padding: 0 !important; /* Remove padding to avoid conflicts with article content */
+  display: block !important;
+  flex-direction: initial !important; /* Prevent flex column layout */
+  flex-wrap: initial !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  @include breakpoint($large) {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  @include breakpoint($x-large) {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    /* CRITICAL: Ensure content flows horizontally, not vertically on x-large screens */
+    flex: none !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   p {
-    margin-bottom: 1.2em; /* Better paragraph spacing */
+    margin-bottom: 1.2em !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin-top: 2em;
     margin-bottom: 1em;
-    font-weight: 600; /* Slightly bolder headings */
+    font-weight: 600;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
   }
 }
 
@@ -534,9 +619,11 @@ blockquote {
    Modern UI Elements
    ========================================================================== */
 
-/* Card-like sections */
-.page__content > section,
-.page__content > div {
+/* Card-like sections - REMOVED to prevent breaking article content layout */
+/* Only apply card styles to explicitly marked elements, not all divs/sections */
+/*
+.page__content > .card,
+.page__content > .highlight-section {
   background: var(--global-bg-color);
   border-radius: 8px;
   padding: 1.5em;
@@ -548,6 +635,7 @@ blockquote {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
+*/
 
 /* Better buttons */
 .btn {
@@ -709,6 +797,341 @@ table {
   .page {
     margin-left: 0 !important;
     width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   CRITICAL FIX: Remove all card styling from article content
+   This must be at the end to override any other rules
+   ========================================================================== */
+
+/* Force remove card styling from ALL elements inside page__content */
+.page__content,
+section.page__content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Remove card styling from block-level elements only */
+.page__content > div,
+.page__content > section,
+.page__content div:not(strong):not(em):not(a):not(span):not(code),
+.page__content section {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  float: none !important;
+  clear: both !important;
+  flex-direction: initial !important;
+  flex-wrap: initial !important;
+}
+
+/* Remove card styling from all elements but preserve their display type */
+.page__content * {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  flex-direction: initial !important;
+  flex-wrap: initial !important;
+}
+
+/* Restore proper content element styling */
+.page__content p,
+.page__content li,
+.page__content dd,
+.page__content dt,
+.page__content blockquote,
+.page__content pre,
+.page__content code,
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4,
+.page__content h5,
+.page__content h6,
+.page__content ul,
+.page__content ol,
+.page__content table,
+.page__content th,
+.page__content td,
+.page__content strong,
+.page__content em,
+.page__content a,
+.page__content span {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+/* Restore proper margins for content elements */
+.page__content p {
+  margin-bottom: 1.2em !important;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+.page__content ul,
+.page__content ol {
+  margin-left: 1.5em !important;
+  margin-bottom: 1.2em !important;
+  padding-left: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+.page__content li {
+  display: list-item !important;
+  width: auto !important;
+  float: none !important;
+}
+
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4,
+.page__content h5,
+.page__content h6 {
+  margin-top: 2em !important;
+  margin-bottom: 1em !important;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+}
+
+/* Ensure all text content flows normally */
+.page__content strong,
+.page__content em,
+.page__content a,
+.page__content span,
+.page__content code {
+  display: inline !important;
+  width: auto !important;
+  float: none !important;
+}
+
+.page__content pre,
+.page__content blockquote {
+  display: block !important;
+  width: 100% !important;
+  float: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ==========================================================================
+   ULTIMATE FIX: Remove ALL card styling with maximum specificity
+   ========================================================================== */
+
+/* Use maximum specificity to override everything - FINAL FIX */
+article.page .page__inner-wrap section.page__content,
+section.page__content,
+.page .page__inner-wrap section.page__content,
+#main .page .page__inner-wrap section.page__content,
+body article.page .page__inner-wrap section.page__content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  flex-direction: initial !important;
+  flex-wrap: initial !important;
+
+  @include breakpoint($x-large) {
+    /* CRITICAL: Prevent flex column layout on x-large screens (>1280px) */
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    flex: none !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* CRITICAL: Remove card styling from EVERY element, including nested ones */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  @include breakpoint($x-large) {
+    *,
+    *::before,
+    *::after {
+      display: revert !important;
+      flex-direction: initial !important;
+      flex-wrap: initial !important;
+      flex: none !important;
+    }
+  }
+
+  /* Direct children - remove all card styling */
+  > * {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Paragraphs - restore normal flow, NO card styling */
+  p,
+  p:first-child,
+  p:last-child,
+  p:only-child {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 1.2em !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Headings - restore normal flow, NO card styling */
+  h1, h2, h3, h4, h5, h6 {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-top: 2em !important;
+    margin-bottom: 1em !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Lists - restore normal flow */
+  ul, ol {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding-left: 1.5em !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-left: 1.5em !important;
+    margin-bottom: 1.2em !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  li {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: list-item !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Keep inline elements inline */
+  strong, em, a, span, code:not(pre code) {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline !important;
+    width: auto !important;
+  }
+
+  /* Block elements - NO card styling */
+  div, section, article, aside, header, footer {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  pre, blockquote {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  hr {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 2em 0 !important;
+  }
+}
+
+/* ==========================================================================
+   CRITICAL FIX FOR X-LARGE SCREENS (>1600px)
+   ========================================================================== */
+
+/* Additional media query for screens wider than 1600px to prevent vertical layout */
+@media screen and (min-width: 1600px) {
+  article.page .page__inner-wrap section.page__content,
+  section.page__content {
+    display: block !important;
+    flex-direction: initial !important;
+    flex-wrap: initial !important;
+    flex: none !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+
+    * {
+      display: revert !important;
+      flex-direction: initial !important;
+      flex-wrap: initial !important;
+      flex: none !important;
+    }
+
+    p, h1, h2, h3, h4, h5, h6, ul, ol, li {
+      display: block !important;
+      width: auto !important;
+      max-width: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+    }
+
+    strong, em, a, span, code:not(pre code) {
+      display: inline !important;
+    }
   }
 }
 
