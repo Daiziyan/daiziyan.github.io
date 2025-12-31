@@ -1,6 +1,7 @@
 ---
 title: '充电站：Data Analysis with Python for Excel Users - Full Course'
 date: 2025-07-15
+lang: zh
 permalink: /posts/2014/08/automate-excel-with-python
 tags:
   - python

@@ -1,6 +1,7 @@
 ---
 title: 'Building Effective Documentation'
 date: 2025-03-06
+lang: en
 permalink: /posts/build-effective-docs
 tags:
   - cool posts

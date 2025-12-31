@@ -269,14 +269,103 @@ pre {
 }
 
 /* Language switcher in navigation */
+.greedy-nav {
+  /* Ensure container has enough width */
+  width: 100% !important;
+  max-width: 100% !important;
+
+  .visible-links {
+    /* Use flexbox but ensure proper width calculation */
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    max-width: calc(100% - 60px) !important; /* Reserve space for hamburger button */
+
+    li {
+      display: flex !important;
+      align-items: center !important;
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    li.masthead__menu-item--lang {
+      margin-left: auto !important;
+      margin-right: 0.5rem !important; /* Space from hamburger menu */
+      flex-shrink: 0 !important; /* Never shrink */
+      order: 999 !important; /* Always last */
+      visibility: visible !important;
+      opacity: 1 !important;
+      display: flex !important;
+      align-items: center !important; /* Center align with nav links */
+      width: auto !important;
+      min-width: auto !important;
+      position: relative !important;
+      z-index: 10 !important;
+      height: 100% !important; /* Match height of nav items */
+
+      /* Ensure language switcher container is visible */
+      .language-switcher {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        vertical-align: middle !important;
+      }
+    }
+
+    /* Restore underline effect for navigation links */
+    li:not(.masthead__menu-item--lang) a {
+      position: relative !important;
+
+      &::before {
+        content: "" !important;
+        position: absolute !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        height: 4px !important;
+        background: var(--global-border-color) !important;
+        width: 100% !important;
+        transition: transform 0.3s ease !important;
+        transform: scaleX(0) !important;
+      }
+
+      &:hover::before {
+        transform: scaleX(1) !important;
+      }
+    }
+
+    @include breakpoint(max-width $medium) {
+      flex-wrap: wrap !important;
+
+      li.masthead__menu-item--lang {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 0.5em !important;
+        width: 100% !important;
+      }
+    }
+  }
+}
+
 .masthead__menu-item--lang {
-  margin-left: auto !important;
-  display: table-cell !important;
+  display: flex !important;
+  align-items: center !important;
   vertical-align: middle !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important; /* Never shrink */
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  height: 100% !important; /* Match height of other nav items */
+  line-height: inherit !important; /* Match line-height of nav links */
 
   @include breakpoint(max-width $medium) {
     margin-left: 0 !important;
     display: block !important;
+    height: auto !important;
   }
 }
 
@@ -284,10 +373,86 @@ pre {
   display: inline-block !important;
   margin: 0 !important;
   vertical-align: middle !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  line-height: 1 !important; /* Reset line-height for button */
 
   @include breakpoint(max-width $medium) {
     margin: 0.5em 0 !important;
     display: block !important;
+  }
+}
+
+/* Language switcher button styling - make it prominent */
+.greedy-nav .language-switcher__btn,
+.language-switcher__btn {
+  margin: 0 !important;
+  margin-top: -15px !important; /* Move up slightly to align with nav links */
+  padding: 0.25rem 0.9rem !important; /* Further reduced vertical padding */
+  font-size: 0.9em !important; /* Match nav link font size */
+  font-weight: 600 !important;
+  color: var(--global-masthead-link-color) !important;
+  border: 2px solid var(--global-border-color) !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  min-width: 70px !important;
+  text-align: center !important;
+  display: inline-flex !important; /* Use flex for better alignment */
+  align-items: center !important; /* Center content vertically */
+  justify-content: center !important; /* Center content horizontally */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  line-height: 1.0 !important; /* Tighter line-height for better alignment */
+  vertical-align: middle !important; /* Align with nav links */
+
+  &:hover {
+    color: #fff !important;
+    background: var(--global-link-color) !important;
+    border-color: var(--global-link-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  &:active {
+    transform: translateY(0) !important;
+  }
+
+  &:focus {
+    outline: 2px solid var(--global-link-color) !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Remove underline effect */
+  &::before {
+    display: none !important;
+  }
+
+  .lang-current {
+    font-weight: 700 !important;
+  }
+
+  .lang-separator {
+    margin: 0 0.4em !important;
+    opacity: 0.6 !important;
+  }
+
+  .lang-other {
+    opacity: 0.8 !important;
+  }
+
+  @include breakpoint(max-width $medium) {
+    width: 100% !important;
+    min-width: auto !important;
+    margin: 0.5em 0 !important;
+    padding: 0.6rem 1rem !important;
   }
 }
 

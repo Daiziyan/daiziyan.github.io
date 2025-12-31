@@ -1,6 +1,7 @@
 ---
 title: '充电站：内存的原理'
 date: 2025-09-11
+lang: zh
 permalink: /posts/2025/09/RAM-introduction
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Markdown 和 XML 的对比"
 date: 2025-04-23
+lang: zh
 permalink: /posts/markdown-xml
 tags:
   - cool posts

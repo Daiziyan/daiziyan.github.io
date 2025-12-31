@@ -1,0 +1,35 @@
+---
+layout: default
+permalink: /
+---
+
+<script>
+(function() {
+  'use strict';
+
+  // Get language preference
+  var lang = localStorage.getItem('site-language') || 'en';
+
+  // Check URL for language indicator
+  var path = window.location.pathname;
+  if (path === '/' || path === '') {
+    // Redirect to language-specific home page
+    if (lang === 'zh') {
+      window.location.href = '/zh/';
+    } else {
+      window.location.href = '/en/';
+    }
+  }
+})();
+</script>
+
+<!-- Fallback content if JavaScript is disabled -->
+<div style="text-align: center; padding: 2em;">
+  <h1>Welcome</h1>
+  <p>Please enable JavaScript to view this site, or visit:</p>
+  <ul style="list-style: none; padding: 0;">
+    <li><a href="/en/">English Version</a></li>
+    <li><a href="/zh/">中文版本</a></li>
+  </ul>
+</div>
+

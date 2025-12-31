@@ -1,6 +1,7 @@
 ---
 title: 'Optimizing Technical Docs for LLMs'
 date: 2025-02-18
+lang: en
 permalink: /posts/tech-docs-for-llms
 tags:
   - cool posts

@@ -3,11 +3,11 @@
 
 main:
   - title: "简历"
-    url: /cv/
+    url: /zh/cv/
 
   - title: "博客文章"
-    url: /blog-posts/
+    url: /zh/blog-posts/
 
   - title: "技术写作"
-    url: /technical-writing/
+    url: /zh/technical-writing/
 

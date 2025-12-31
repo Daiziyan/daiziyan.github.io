@@ -8,12 +8,103 @@ redirect_from:
 ---
 
 {% include base_path %}
-{% capture written_year %}'None'{% endcapture %}
-{% for post in site.posts %}
-  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
-    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
-    {% capture written_year %}{{ year }}{% endcapture %}
-  {% endif %}
-  {% include archive-single.html %}
-{% endfor %}
+
+<div id="blog-posts-container" data-lang-filter="all">
+  {% capture written_year %}'None'{% endcapture %}
+  {% for post in site.posts %}
+    {% assign post_lang = post.lang | default: 'en' %}
+    {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+    {% if year != written_year %}
+      <h2 id="{{ year | slugify }}" class="archive__subtitle" data-year="{{ year }}">{{ year }}</h2>
+      {% capture written_year %}{{ year }}{% endcapture %}
+    {% endif %}
+    <div class="archive-item-wrapper" data-lang="{{ post_lang }}">
+      {% include archive-single.html %}
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // Get current language from localStorage
+  var currentLang = localStorage.getItem('site-language') || 'en';
+
+  function filterPostsByLanguage() {
+    var container = document.getElementById('blog-posts-container');
+    if (!container) return;
+
+    var lang = currentLang;
+    var items = container.querySelectorAll('.archive-item-wrapper');
+    var years = container.querySelectorAll('.archive__subtitle');
+
+    // Show/hide posts based on language
+    items.forEach(function(item) {
+      var itemLang = item.getAttribute('data-lang');
+      if (lang === 'all' || itemLang === lang) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    // Hide empty year headers
+    years.forEach(function(year) {
+      var yearId = year.getAttribute('id');
+      var hasVisiblePosts = false;
+      items.forEach(function(item) {
+        if (item.style.display !== 'none') {
+          var prevYear = item.previousElementSibling;
+          while (prevYear && !prevYear.classList.contains('archive__subtitle')) {
+            prevYear = prevYear.previousElementSibling;
+          }
+          if (prevYear && prevYear.getAttribute('id') === yearId) {
+            hasVisiblePosts = true;
+          }
+        }
+      });
+
+      // Check if this year has any visible posts
+      var yearItems = Array.from(items).filter(function(item) {
+        if (item.style.display === 'none') return false;
+        var prevYear = item.previousElementSibling;
+        while (prevYear && !prevYear.classList.contains('archive__subtitle')) {
+          prevYear = prevYear.previousElementSibling;
+        }
+        return prevYear && prevYear.getAttribute('id') === yearId;
+      });
+
+      if (yearItems.length === 0) {
+        year.style.display = 'none';
+      } else {
+        year.style.display = '';
+      }
+    });
+  }
+
+  // Filter on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', filterPostsByLanguage);
+  } else {
+    filterPostsByLanguage();
+  }
+
+  // Listen for language changes
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'site-language') {
+      currentLang = e.newValue || 'en';
+      filterPostsByLanguage();
+    }
+  });
+
+  // Also check periodically (in case language is changed in same window)
+  setInterval(function() {
+    var newLang = localStorage.getItem('site-language') || 'en';
+    if (newLang !== currentLang) {
+      currentLang = newLang;
+      filterPostsByLanguage();
+    }
+  }, 500);
+})();
+</script>

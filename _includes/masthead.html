@@ -1,13 +1,23 @@
 {% include base_path %}
 
+{% comment %} Determine navigation based on URL or default to English {% endcomment %}
+{% assign current_path = page.url | default: '/' %}
+{% if current_path contains '/zh/' %}
+  {% assign nav_data = site.data.navigation-zh.main %}
+  {% assign home_url = '/zh/' %}
+{% else %}
+  {% assign nav_data = site.data.navigation.main %}
+  {% assign home_url = '/en/' %}
+{% endif %}
+
 <div class="masthead">
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}/" data-i18n="site-title">{{ site.title }}</a></li>
-          {% for link in site.data.navigation.main %}
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}{{ home_url }}" data-i18n="site-title">{{ site.title }}</a></li>
+          {% for link in nav_data %}
             {% if link.url contains 'http' %}
               {% assign domain = '' %}
             {% else %}

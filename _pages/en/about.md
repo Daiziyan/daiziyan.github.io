@@ -1,7 +1,8 @@
 ---
-permalink: /
+permalink: /en/
 title: "Welcome to My Personal Website"
 author_profile: true
+lang: en
 redirect_from:
   - /about/
   - /about.html

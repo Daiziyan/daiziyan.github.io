@@ -1,0 +1,19 @@
+---
+layout: archive
+title: "技术写作"
+permalink: /zh/technical-writing/
+author_profile: true
+lang: zh
+redirect_from:
+  - /technical-writing/
+---
+
+{% include base_path %}
+
+{% for post in site.technical-writing reversed %}
+  {% assign post_lang = post.lang | default: 'en' %}
+  {% if post_lang == 'zh' %}
+    {% include archive-single.html %}
+  {% endif %}
+{% endfor %}
+

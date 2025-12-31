@@ -1,8 +1,11 @@
 ---
 layout: archive
 title: "Technical Writing"
-permalink: /technical-writing/
+permalink: /en/technical-writing/
 author_profile: true
+lang: en
+redirect_from:
+  - /technical-writing/
 ---
 
 <!-- <h1>Technical Writing Articles</h1>
@@ -15,6 +18,9 @@ author_profile: true
 {% include base_path %}
 
 {% for post in site.technical-writing reversed %}
-  {% include archive-single.html %}
+  {% assign post_lang = post.lang | default: 'en' %}
+  {% if post_lang == 'en' %}
+    {% include archive-single.html %}
+  {% endif %}
 {% endfor %}
 

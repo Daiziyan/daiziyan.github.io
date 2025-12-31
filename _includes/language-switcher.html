@@ -27,8 +27,51 @@
     }
   };
 
-  // Get current language from localStorage or default to 'en'
-  var currentLang = localStorage.getItem('site-language') || 'en';
+  // Get current language from localStorage, URL, or default to 'en'
+  function getCurrentLanguage() {
+    // Check URL first
+    var path = window.location.pathname;
+    if (path.startsWith('/zh/')) {
+      return 'zh';
+    } else if (path.startsWith('/en/')) {
+      return 'en';
+    }
+    // Then check localStorage
+    return localStorage.getItem('site-language') || 'en';
+  }
+
+  var currentLang = getCurrentLanguage();
+
+  // Navigation URLs for each language
+  var navUrls = {
+    en: {
+      'nav-1': '/en/cv/',
+      'nav-2': '/en/blog-posts/',
+      'nav-3': '/en/technical-writing/',
+      'site-title': '/en/'
+    },
+    zh: {
+      'nav-1': '/zh/cv/',
+      'nav-2': '/zh/blog-posts/',
+      'nav-3': '/zh/technical-writing/',
+      'site-title': '/zh/'
+    }
+  };
+
+  // Get equivalent page URL in another language
+  function getEquivalentUrl(targetLang) {
+    var currentPath = window.location.pathname;
+    var currentBase = currentLang === 'zh' ? '/zh' : '/en';
+    var targetBase = targetLang === 'zh' ? '/zh' : '/en';
+
+    // If already on a language-specific page, swap the language prefix
+    if (currentPath.startsWith(currentBase + '/')) {
+      return currentPath.replace(currentBase, targetBase);
+    }
+
+    // Otherwise, redirect to home page in target language
+    return targetBase + '/';
+  }
 
   // Initialize language
   function initLanguage() {
@@ -59,16 +102,79 @@
     // Translate elements
     translatePage();
 
+    // Update navigation URLs
+    updateNavigationUrls();
+
+    // Filter posts by language (if on blog posts page)
+    filterPostsByLanguage();
+
     // Add click handler (only once)
     if (!langSwitcher.hasAttribute('data-handler-attached')) {
       langSwitcher.setAttribute('data-handler-attached', 'true');
       langSwitcher.addEventListener('click', function(e) {
         e.preventDefault();
-        currentLang = currentLang === 'en' ? 'zh' : 'en';
-        localStorage.setItem('site-language', currentLang);
-        initLanguage();
+        var newLang = currentLang === 'en' ? 'zh' : 'en';
+        localStorage.setItem('site-language', newLang);
+
+        // Redirect to equivalent page in new language
+        var newUrl = getEquivalentUrl(newLang);
+        window.location.href = newUrl;
       });
     }
+  }
+
+  // Update navigation URLs based on current language
+  function updateNavigationUrls() {
+    var navLinks = document.querySelectorAll('[data-i18n]');
+    var urls = navUrls[currentLang] || navUrls.en;
+
+    navLinks.forEach(function(link) {
+      var key = link.getAttribute('data-i18n');
+      if (urls[key] && link.tagName === 'A') {
+        link.setAttribute('href', urls[key]);
+      }
+    });
+  }
+
+  // Filter posts by language
+  function filterPostsByLanguage() {
+    var container = document.getElementById('blog-posts-container');
+    if (!container) return;
+
+    var lang = currentLang;
+    var items = container.querySelectorAll('.archive-item-wrapper');
+    var years = container.querySelectorAll('.archive__subtitle');
+
+    // Show/hide posts based on language
+    items.forEach(function(item) {
+      var itemLang = item.getAttribute('data-lang');
+      if (itemLang === lang) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    // Hide empty year headers
+    years.forEach(function(year) {
+      var yearId = year.getAttribute('id');
+
+      // Check if this year has any visible posts
+      var yearItems = Array.from(items).filter(function(item) {
+        if (item.style.display === 'none') return false;
+        var prevYear = item.previousElementSibling;
+        while (prevYear && !prevYear.classList.contains('archive__subtitle')) {
+          prevYear = prevYear.previousElementSibling;
+        }
+        return prevYear && prevYear.getAttribute('id') === yearId;
+      });
+
+      if (yearItems.length === 0) {
+        year.style.display = 'none';
+      } else {
+        year.style.display = '';
+      }
+    });
   }
 
   // Translate page elements

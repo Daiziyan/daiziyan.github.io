@@ -228,11 +228,46 @@ collections:
   technical-writing:
     output: true
     permalink: /:collection/:path/
+  # Multi-language collections
+  posts_en:
+    output: true
+    permalink: /posts/en/:name/
+  posts_zh:
+    output: true
+    permalink: /posts/zh/:name/
+  technical-writing_en:
+    output: true
+    permalink: /technical-writing/en/:name/
+  technical-writing_zh:
+    output: true
+    permalink: /technical-writing/zh/:name/
 
 
 # These settings control how pages and collections are included in the site
 defaults:
-  # _posts
+  # _posts/en (English posts)
+  - scope:
+      path: "_posts/en"
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      lang: en
+  # _posts/zh (Chinese posts)
+  - scope:
+      path: "_posts/zh"
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      lang: zh
+  # Legacy _posts (for backward compatibility)
   - scope:
       path: ""
       type: posts
@@ -285,7 +320,25 @@ defaults:
       layout: talk
       author_profile: true
       share: true
-  # _publications
+  # _technical-writing/en (English technical writing)
+  - scope:
+      path: "_technical-writing/en"
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+      lang: en
+  # _technical-writing/zh (Chinese technical writing)
+  - scope:
+      path: "_technical-writing/zh"
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+      lang: zh
+  # Legacy _technical-writing (for backward compatibility)
   - scope:
       path: ""
       type: technical-writing
@@ -308,6 +361,12 @@ permalink: /:categories/:title/
 # paginate: 5 # amount of posts to show
 # paginate_path: /page:num/
 timezone: Etc/UTC # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+# Multi-language support
+# Posts in _posts/en/ will be accessible via site.posts_en
+# Posts in _posts/zh/ will be accessible via site.posts_zh
+# Technical writing in _technical-writing/en/ will be accessible via site.technical-writing_en
+# Technical writing in _technical-writing/zh/ will be accessible via site.technical-writing_zh
 
 
 # Plugins

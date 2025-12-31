@@ -6,13 +6,13 @@
 
 main:
   - title: "CV"
-    url: /cv/
+    url: /en/cv/
 
   - title: "Blog Posts"
-    url: /blog-posts/
+    url: /en/blog-posts/
 
   - title: "Technical Writing"
-    url: /technical-writing/
+    url: /en/technical-writing/
 
   # - title: "Portfolio"
   #   url: /portfolio/

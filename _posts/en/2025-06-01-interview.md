@@ -1,6 +1,7 @@
 ---
 title: "How to Prepare for a Technical Writer Interview"
 date: 2025-06-12
+lang: en
 categories: [career, interview]
 ---
 
@@ -16,22 +17,22 @@ I have a strong background in English Interpretation and Business English, with 
 
 ## 2. Walk me through your resume
 
-- **Education:**  
-  - Master in English Interpretation, University of International Business and Economics  
+- **Education:**
+  - Master in English Interpretation, University of International Business and Economics
   - Bachelor in Business English, Jinan University
 
-- **Work Experience:**  
-  - Technical Writer at Espressif Systems (2020–Present)  
+- **Work Experience:**
+  - Technical Writer at Espressif Systems (2020–Present)
     - Developed and maintained hardware documentation (TRMs, datasheets, design guides)
     - Led the ESP-IDF Translation Team, managing over 400 documents across nine chip series
     - Standardized terminology and automated glossary generation
     - Automated translation request workflows and formatting checks
     - Analyzed customer feedback to improve documentation quality
 
-- **Skills:**  
-  - Documentation tools: LaTeX, reStructuredText, Markdown  
-  - Programming: Python, Linux Shell  
-  - Version control: Git  
+- **Skills:**
+  - Documentation tools: LaTeX, reStructuredText, Markdown
+  - Programming: Python, Linux Shell
+  - Version control: Git
   - Office tools: Word, Excel, PPT
 
 ---
