@@ -1,0 +1,101 @@
+<div class="language-switcher">
+  <button class="language-switcher__btn" id="lang-switcher" aria-label="Switch Language" title="切换语言 / Switch Language">
+    <span class="lang-current" id="lang-current">EN</span>
+    <span class="lang-separator">/</span>
+    <span class="lang-other" id="lang-other">中文</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // Translation data - avoid Liquid syntax in script
+  var siteTitle = 'Road to Technical Writer';
+  var translations = {
+    en: {
+      'nav-1': 'CV',
+      'nav-2': 'Blog Posts',
+      'nav-3': 'Technical Writing',
+      'site-title': siteTitle
+    },
+    zh: {
+      'nav-1': '简历',
+      'nav-2': '博客文章',
+      'nav-3': '技术写作',
+      'site-title': '技术写作者之路'
+    }
+  };
+
+  // Get current language from localStorage or default to 'en'
+  var currentLang = localStorage.getItem('site-language') || 'en';
+
+  // Initialize language
+  function initLanguage() {
+    var langSwitcher = document.getElementById('lang-switcher');
+    var langCurrent = document.getElementById('lang-current');
+    var langOther = document.getElementById('lang-other');
+
+    if (!langSwitcher || !langCurrent || !langOther) {
+      console.log('Language switcher elements not found');
+      return;
+    }
+
+    // Set document language
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en-US';
+    if (document.body) {
+      document.body.setAttribute('data-lang', currentLang);
+    }
+
+    // Update switcher display
+    if (currentLang === 'zh') {
+      langCurrent.textContent = '中文';
+      langOther.textContent = 'EN';
+    } else {
+      langCurrent.textContent = 'EN';
+      langOther.textContent = '中文';
+    }
+
+    // Translate elements
+    translatePage();
+
+    // Add click handler (only once)
+    if (!langSwitcher.hasAttribute('data-handler-attached')) {
+      langSwitcher.setAttribute('data-handler-attached', 'true');
+      langSwitcher.addEventListener('click', function(e) {
+        e.preventDefault();
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        localStorage.setItem('site-language', currentLang);
+        initLanguage();
+      });
+    }
+  }
+
+  // Translate page elements
+  function translatePage() {
+    try {
+      var elements = document.querySelectorAll('[data-i18n]');
+      var t = translations[currentLang] || translations.en;
+
+      for (var i = 0; i < elements.length; i++) {
+        var el = elements[i];
+        var key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      }
+    } catch (e) {
+      console.log('Translation error:', e);
+    }
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguage);
+  } else {
+    // DOM already loaded
+    setTimeout(initLanguage, 100);
+  }
+})();
+</script>
+

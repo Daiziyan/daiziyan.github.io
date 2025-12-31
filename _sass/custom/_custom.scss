@@ -1,37 +1,550 @@
 /* ==========================================================================
-   Custom Styles - Wider Page Layout
+   Custom Styles - Professional Website Enhancements
    ========================================================================== */
 
-/* Increase overall container width for better readability */
+/* ==========================================================================
+   Wider Page Layout
+   ========================================================================== */
+
+/* Increase overall container width and center it, sidebar and content side by side */
 #main {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: relative !important;
+
+  @include breakpoint(max-width $medium) {
+    /* Small screens: full width, centered */
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 2em auto 0 !important;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    display: block !important;
+  }
+
+  @include breakpoint($large) {
+    /* Large screens: flexbox layout, centered container */
+    max-width: 1400px !important; /* Maximum width for large screens */
+    width: 100% !important;
+    margin: 2em auto 0 !important; /* Center the container */
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    display: flex !important; /* Use flexbox for sidebar and content */
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 2em !important; /* Space between sidebar and content */
+  }
+
   @include breakpoint($x-large) {
-    max-width: 1600px; /* Increased from 1280px */
+    max-width: 1600px !important; /* Maximum width for very large screens */
+    margin: 2em auto 0 !important; /* Center the container */
+    padding-left: 3em !important;
+    padding-right: 3em !important;
   }
 }
 
-/* Adjust page layout: increase content width while maintaining sidebar spacing */
+/* Adjust page layout: content takes remaining space in flexbox */
 .page {
-  @include breakpoint($large) {
-    /* Override grid system to account for fixed sidebar */
-    /* Sidebar is fixed at max 250px, so we need proper spacing */
-    margin-left: 280px !important; /* Sidebar (250px) + gap (30px) */
-    width: calc(100% - 300px) !important; /* Full width minus sidebar space */
-    max-width: none !important;
-    float: left !important;
+  /* Small screens: full width, no sidebar offset */
+  @include breakpoint(max-width $medium) {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1em !important;
+    float: none !important;
+  }
 
-    /* Remove original grid spans that would conflict */
+  /* Large screens: flex item, takes remaining space */
+  @include breakpoint($large) {
+    /* Override grid system completely */
+    margin-left: 0 !important; /* No margin needed, flexbox handles spacing */
+    flex: 1 !important; /* Take remaining space */
+    min-width: 0 !important; /* Allow flex item to shrink */
+    max-width: none !important;
+    float: none !important;
     margin-right: 0 !important;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    display: block !important;
+    position: relative !important;
   }
 
   @include breakpoint($x-large) {
-    /* On extra large screens, use even more width */
-    margin-left: 280px !important;
-    width: calc(100% - 320px) !important; /* More width, less right margin */
+    padding-left: 3em !important;
+    padding-right: 3em !important;
   }
 }
 
 /* Ensure content area uses full width */
 .page__content {
-  max-width: 100%;
+  max-width: 100% !important;
+  line-height: 1.8 !important; /* Better readability */
+  background: var(--global-bg-color) !important;
+  padding: 2em !important;
+  border-radius: 8px !important;
+
+  @include breakpoint($large) {
+    padding: 3em !important;
+  }
+
+  p {
+    margin-bottom: 1.2em; /* Better paragraph spacing */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600; /* Slightly bolder headings */
+  }
 }
+
+/* ==========================================================================
+   Language Switcher
+   ========================================================================== */
+
+.language-switcher {
+  display: inline-block;
+  margin-left: 1em;
+  vertical-align: middle;
+
+  @include breakpoint(max-width $medium) {
+    margin-left: 0.5em;
+  }
+}
+
+.language-switcher__btn {
+  background: transparent !important;
+  border: 1px solid var(--global-border-color) !important;
+  border-radius: 4px !important;
+  padding: 0.4em 0.8em !important;
+  font-size: 0.9em !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  color: var(--global-text-color) !important;
+  font-family: $sans-serif !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+
+  &:hover {
+    background: var(--global-link-color) !important;
+    color: #fff !important;
+    border-color: var(--global-link-color) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  &:active {
+    transform: translateY(0) !important;
+  }
+
+  .lang-current {
+    font-weight: 600;
+  }
+
+  .lang-separator {
+    margin: 0 0.3em;
+    opacity: 0.5;
+  }
+
+  .lang-other {
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   Enhanced Visual Design
+   ========================================================================== */
+
+/* Better spacing and typography */
+body {
+  font-size: 16px !important; /* Base font size */
+
+  @include breakpoint($large) {
+    font-size: 17px !important;
+  }
+}
+
+/* Enhanced links */
+a {
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: var(--global-link-color-hover);
+  }
+}
+
+/* Better code blocks */
+pre, code {
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+}
+
+pre {
+  padding: 1em;
+  overflow-x: auto;
+}
+
+/* Improved sidebar - normal flow, not floating */
+.sidebar,
+.sidebar.sticky {
+  /* Small screens: don't use fixed positioning to avoid overlap */
+  @include breakpoint(max-width $medium) {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    left: auto !important;
+    top: auto !important;
+    height: auto !important;
+    float: none !important;
+    margin: 0 0 2em 0 !important;
+    padding: 1.5em !important;
+  }
+
+  /* Override fixed positioning from _sidebar.scss for all screen sizes */
+  @media screen and (min-width: 1024px) {
+    position: relative !important; /* Normal flow, not fixed */
+    left: auto !important;
+    top: auto !important;
+    height: auto !important; /* Natural height */
+    overflow-y: visible !important;
+    padding-top: 0 !important; /* Remove padding-top from fixed positioning */
+  }
+
+  /* Large screens: normal flow sidebar on left, part of flexbox */
+  @include breakpoint($large) {
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    width: 250px !important; /* Fixed width for sidebar */
+    max-width: 250px !important;
+    min-width: 250px !important;
+    flex-shrink: 0 !important; /* Don't shrink in flexbox */
+    position: relative !important; /* Normal flow, not fixed */
+    left: auto !important;
+    top: auto !important;
+    height: auto !important; /* Natural height */
+    overflow-y: visible !important;
+    padding: 2em 1.5em !important;
+    background: var(--global-bg-color) !important;
+    z-index: 1 !important; /* Lower z-index since not floating */
+    /* Remove any grid system spans that might affect width */
+    float: none !important;
+    margin: 0 !important;
+    /* Override any span() mixins */
+    display: block !important;
+  }
+
+  @include breakpoint($x-large) {
+    width: 280px !important; /* Slightly wider on extra large screens */
+    max-width: 280px !important;
+    min-width: 280px !important;
+  }
+}
+
+/* Enhanced author profile */
+.author__avatar img {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Better navigation */
+.masthead {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--global-bg-color);
+  -webkit-backdrop-filter: blur(10px); /* Modern glass effect */
+  backdrop-filter: blur(10px); /* Modern glass effect */
+}
+
+.masthead__menu-item a {
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--global-link-color);
+  }
+}
+
+/* Language switcher in navigation */
+.masthead__menu-item--lang {
+  margin-left: auto !important;
+  display: table-cell !important;
+  vertical-align: middle !important;
+
+  @include breakpoint(max-width $medium) {
+    margin-left: 0 !important;
+    display: block !important;
+  }
+}
+
+.language-switcher {
+  display: inline-block !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+
+  @include breakpoint(max-width $medium) {
+    margin: 0.5em 0 !important;
+    display: block !important;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus states for accessibility */
+a:focus,
+button:focus {
+  outline: 2px solid var(--global-link-color);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Enhanced Typography
+   ========================================================================== */
+
+/* Better font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Improved heading hierarchy */
+h1 {
+  font-size: 2.5em;
+  line-height: 1.2;
+  margin-bottom: 0.8em;
+
+  @include breakpoint($large) {
+    font-size: 3em;
+  }
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 1.3;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--global-border-color);
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.4;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+}
+
+/* Better list styling */
+ul, ol {
+  margin-left: 1.5em;
+  margin-bottom: 1.2em;
+
+  li {
+    margin-bottom: 0.5em;
+    line-height: 1.7;
+  }
+}
+
+/* Enhanced blockquotes */
+blockquote {
+  border-left: 4px solid var(--global-link-color);
+  padding-left: 1.5em;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: var(--global-text-color-light);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 1em 1.5em;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Modern UI Elements
+   ========================================================================== */
+
+/* Card-like sections */
+.page__content > section,
+.page__content > div {
+  background: var(--global-bg-color);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin-bottom: 2em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Better buttons */
+.btn {
+  border-radius: 6px;
+  padding: 0.6em 1.2em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Better author profile card - ensure proper sizing */
+.author__avatar {
+  margin-bottom: 1em !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+
+  @include breakpoint($large) {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  img {
+    max-width: 175px !important;
+    width: 175px !important;
+    height: 175px !important;
+    border: 3px solid var(--global-border-color) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 50% !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+}
+
+.author__content {
+  padding: 1em 0 !important;
+  width: 100% !important;
+  display: block !important;
+  text-align: center !important;
+
+  @include breakpoint($large) {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+.author__name {
+  font-size: 1.2em !important;
+  font-weight: 600 !important;
+  margin: 1em 0 0.5em 0 !important;
+  text-align: center !important;
+}
+
+.author__bio {
+  text-align: center !important;
+  margin-bottom: 1em !important;
+}
+
+/* Improved tags and categories */
+.page__taxonomy-item {
+  transition: all 0.2s ease;
+  border-radius: 20px;
+
+  &:hover {
+    background: var(--global-link-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Better code blocks */
+.highlight {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+
+  th {
+    background: var(--global-thead-color);
+    font-weight: 600;
+    padding: 0.8em;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8em;
+    border-top: 1px solid var(--global-border-color);
+  }
+
+  tr:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+}
+
+/* ==========================================================================
+   Responsive Improvements
+   ========================================================================== */
+
+@include breakpoint(max-width $medium) {
+  .page {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 1em;
+  }
+
+  .page__content {
+    padding: 1.5em;
+  }
+
+  .language-switcher {
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .masthead,
+  .sidebar,
+  .language-switcher,
+  .page__share {
+    display: none;
+  }
+
+  .page {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
 

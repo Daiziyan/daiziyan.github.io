@@ -28,7 +28,7 @@ function updateNav() {
       $vlinks.children('*:not(.masthead__menu-item--lg)').last().prependTo($hlinks);
 
       availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
-      
+
       // Show the dropdown btn
       if($btn.hasClass('hidden')) {
         $btn.removeClass('hidden');

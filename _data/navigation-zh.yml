@@ -1,0 +1,13 @@
+# Chinese Navigation
+# 中文导航
+
+main:
+  - title: "简历"
+    url: /cv/
+
+  - title: "博客文章"
+    url: /blog-posts/
+
+  - title: "技术写作"
+    url: /technical-writing/
+
