@@ -12,7 +12,8 @@ tags:
 
 ## 课程资源
 
-YouTube Vedio: https://www.youtube.com/watch?v=WcDaZ67TVRo
+以下是完整的视频教程：[YouTube 视频链接](https://www.youtube.com/watch?v=WcDaZ67TVRo)
+
 
 ## 学习笔记
 
@@ -25,6 +26,4 @@ YouTube Vedio: https://www.youtube.com/watch?v=WcDaZ67TVRo
 - python is good for automation
 - python can handle complex data transformation
 - python has cross platform capabilities
-
-
 
